@@ -30,6 +30,14 @@ export default function Navbar() {
     }
   };
 
+  // Smooth Scroll
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -40,25 +48,30 @@ export default function Navbar() {
             <h1 className="nav-title">🌱 GreenMeter</h1>
           </div>
 
-          {/* CENTER */}
+          {/* NAV LINKS */}
           <ul className="nav-center">
-            <li>Home</li>
-            <li>Features</li>
-            <li>How it Works</li>
-            <li>Blog</li>
-            <li>FAQs</li>
+            <li onClick={() => scrollToSection("home")}>Home</li>
+
+            {/* 🔥 REMOVED LOGIN CHECK HERE */}
+            <li onClick={() => scrollToSection("features")}>Features</li>
+
+            {/* 🔥 REMOVED LOGIN CHECK HERE */}
+            <li onClick={() => scrollToSection("howitworks")}>How it Works</li>
+
+            {/* 🔥 REMOVED LOGIN CHECK HERE */}
+            <li onClick={() => scrollToSection("blog")}>Blog</li>
+
+            <li onClick={() => setFaqOpen(true)}>FAQs</li>
           </ul>
 
-          {/* RIGHT */}
+          {/* RIGHT SIDE */}
           <div className="nav-right">
-
-            {/* THEME TOGGLE */}
             <button className="icon-btn" onClick={toggleTheme}>
-              <span className="icon">{darkMode ? "☀️" : "🌙"}</span>
+              {darkMode ? "☀️" : "🌙"}
             </button>
 
             <button className="icon-btn" onClick={() => setFaqOpen(true)}>
-              <span className="icon">❔</span>
+              ❔
             </button>
 
             <Link to="/login" className="login-btn">
@@ -95,11 +108,11 @@ export default function Navbar() {
         <div className="close-btn" onClick={() => setMenuOpen(false)}>✕</div>
 
         <ul>
-          <li onClick={() => setMenuOpen(false)}>Home</li>
-          <li onClick={() => setMenuOpen(false)}>Features</li>
-          <li onClick={() => setMenuOpen(false)}>How it Works</li>
-          <li onClick={() => setMenuOpen(false)}>Blog</li>
-          <li onClick={() => setMenuOpen(false)}>FAQs</li>
+          <li onClick={() => { scrollToSection("home"); setMenuOpen(false); }}>Home</li>
+          <li onClick={() => { scrollToSection("features"); setMenuOpen(false); }}>Features</li>
+          <li onClick={() => { scrollToSection("howitworks"); setMenuOpen(false); }}>How it Works</li>
+          <li onClick={() => { scrollToSection("blog"); setMenuOpen(false); }}>Blog</li>
+          <li onClick={() => { setFaqOpen(true); setMenuOpen(false); }}>FAQs</li>
           <li>
             <Link to="/login" onClick={() => setMenuOpen(false)}>
               Log In

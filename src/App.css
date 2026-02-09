@@ -2,6 +2,52 @@
 /* ========================================= */
 /*          GLOBAL DARK MODE SYSTEM          */
 /* ========================================= */
+html {
+  scroll-behavior: smooth;
+}
+/* When navbar becomes solid on scroll */
+.navbar.scrolled {
+  background: white !important;
+  border-bottom: 1px solid #e5e5e5;
+}
+/* DARK MODE — navbar text must stay white even when scrolled */
+body.dark .navbar.scrolled .nav-title,
+body.dark .navbar.scrolled .nav-center li,
+body.dark .navbar.scrolled .icon,
+body.dark .navbar.scrolled .hamburger {
+  color: white !important;
+}
+
+/* Dark mode login button */
+body.dark .navbar.scrolled .login-btn {
+  background: #18221e !important;
+  color: #b8ffe0 !important;
+}
+
+/* Dark mode icon buttons */
+body.dark .navbar.scrolled .icon-btn {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.20) !important;
+}
+
+/* Make text black */
+.navbar.scrolled .nav-title,
+.navbar.scrolled .nav-center li,
+.navbar.scrolled .icon,
+.navbar.scrolled .hamburger {
+  color: #0d0d0d !important;
+}
+
+/* Right side icons */
+.navbar.scrolled .icon-btn {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.15);
+}
+
+.navbar.scrolled .login-btn {
+  background: #0d7f49;
+  color: white;
+}
 
 /* LIGHT DEFAULT */
 body {

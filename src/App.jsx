@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -10,34 +10,34 @@ import Footer from "./components/Footer";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import UserHome from "./pages/UserHome";
 
 import { animateOnScroll } from "./scrollAnimation";
 import "./App.css";
 
 export default function App() {
 
-  // 🔥 Apply dark mode BEFORE page loads
+  const location = useLocation();
+  const isDashboard = location.pathname === "/dashboard";
+
+  // Apply dark mode before load
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-
     if (savedTheme === "dark") {
       document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
     }
   }, []);
 
+  // Animations & navbar behavior
   useEffect(() => {
     animateOnScroll();
 
     const navbar = document.querySelector(".navbar");
-
     const handleScroll = () => {
       navbar?.classList.toggle("scrolled", window.scrollY > 30);
     };
 
     const progressBar = document.querySelector(".scroll-progress");
-
     const updateProgressBar = () => {
       if (!progressBar) return;
       const scrollTop = window.scrollY;
@@ -65,27 +65,34 @@ export default function App() {
 
   return (
     <>
-      {/* Only ONE progress bar */}
       <div className="scroll-progress"></div>
 
-      <Navbar />
+      {/* Hide main navbar on dashboard */}
+      {!isDashboard && <Navbar />}
 
       <Routes>
+
+        {/* HOME PAGE */}
         <Route
           path="/"
           element={
             <>
-              <div className="fade-in"><Hero /></div>
-              <div className="fade-up"><Stats /></div>
-              <div className="fade-up"><Features /></div>
-              <div className="fade-up"><HowItWorks /></div>
-              <div className="fade-in"><Footer /></div>
+              <section id="home" className="fade-in"><Hero /></section>
+              <section className="fade-up"><Stats /></section>
+              <section id="features" className="fade-up"><Features /></section>
+              <section id="howitworks" className="fade-up"><HowItWorks /></section>
+              <section id="blog" className="fade-in"><Footer /></section>
             </>
           }
         />
 
+        {/* AUTH PAGES */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* DASHBOARD */}
+        <Route path="/dashboard" element={<UserHome />} />
+
       </Routes>
     </>
   );

@@ -1,40 +1,46 @@
 export default function Features() {
-  const features = [
-    {
-      icon: "🌍",
-      title: "Track Your Carbon Footprint",
-      desc: "Get real-time insights into your daily carbon emissions.",
-    },
-    {
-      icon: "🤖",
-      title: "AI-Powered Insights",
-      desc: "Receive personalized tips to reduce your carbon footprint.",
-    },
-    {
-      icon: "🎯",
-      title: "Set Goals & Challenges",
-      desc: "Set sustainability goals and monitor your progress.",
-    },
-    {
-      icon: "📊",
-      title: "See Your Progress",
-      desc: "Track your eco-efficiency improvements.",
-    },
-  ];
+  const handleFeatureClick = () => {
+    if (!localStorage.getItem("loggedIn")) {
+      window.location.href = "/login";
+      return;
+    }
+
+    // If logged in → future navigation
+    alert("Feature unlocked! (You can link to dashboard features here)");
+  };
 
   return (
-    <section className="features">
+    <div className="features">
+
       <h2>Your Personal Sustainability Dashboard</h2>
 
       <div className="feature-grid">
-        {features.map((f, i) => (
-          <div className="feature-box" key={i}>
-            <div className="feature-icon">{f.icon}</div>
-            <h3 className="feature-title">{f.title}</h3>
-            <p className="feature-text">{f.desc}</p>
-          </div>
-        ))}
+
+        <div className="feature-box" onClick={handleFeatureClick}>
+          <div className="feature-icon">🌍</div>
+          <div className="feature-title">Track Your Carbon Footprint</div>
+          <div className="feature-text">Get real-time insights.</div>
+        </div>
+
+        <div className="feature-box" onClick={handleFeatureClick}>
+          <div className="feature-icon">🤖</div>
+          <div className="feature-title">AI Insights</div>
+          <div className="feature-text">Smart recommendations.</div>
+        </div>
+
+        <div className="feature-box" onClick={handleFeatureClick}>
+          <div className="feature-icon">🎯</div>
+          <div className="feature-title">Set Goals</div>
+          <div className="feature-text">Achieve your targets.</div>
+        </div>
+
+        <div className="feature-box" onClick={handleFeatureClick}>
+          <div className="feature-icon">📊</div>
+          <div className="feature-title">See Progress</div>
+          <div className="feature-text">Track improvements.</div>
+        </div>
+
       </div>
-    </section>
+    </div>
   );
 }
