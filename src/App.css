@@ -1,4 +1,103 @@
 /* GLOBAL */
+/* ========================================= */
+/*          GLOBAL DARK MODE SYSTEM          */
+/* ========================================= */
+
+/* LIGHT DEFAULT */
+body {
+  background: #ffffff;
+  color: #111;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* DARK MODE ROOT COLORS */
+body.dark {
+  --text-main: #eafef4;     /* bright headings */
+  --text-sub: #bcd8cc;      /* softer paragraph */
+  --text-muted: #8ea59c;    /* low contrast */
+  --bg-dark: #0c1411;
+  --bg-card: #111a16;
+}
+
+/* Apply dark background */
+body.dark {
+  background: var(--bg-dark) !important;
+  color: var(--text-sub) !important;
+}
+
+/* MAIN HEADINGS */
+body.dark h1,
+body.dark h2,
+body.dark h3 {
+  color: var(--text-main) !important;
+}
+
+/* PARAGRAPHS + DESCRIPTIONS */
+body.dark p,
+body.dark .feature-text,
+body.dark .how-text {
+  color: var(--text-sub) !important;
+}
+
+/* NAV LINKS */
+body.dark .nav-center li {
+  color: var(--text-main) !important;
+}
+
+/* FOOTER */
+body.dark .footer p,
+body.dark .footer li {
+  color: var(--text-sub) !important;
+}
+
+/* Stats muted text */
+body.dark .stat-text {
+  color: var(--text-muted) !important;
+}
+
+/* SECTION BACKGROUNDS */
+body.dark .features,
+body.dark .how,
+body.dark .stats,
+body.dark .footer {
+  background: #0f1714 !important;
+}
+
+/* CARDS (Features + How boxes) */
+body.dark .feature-box,
+body.dark .how-box {
+  background: var(--bg-card) !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45) !important;
+}
+
+/* CARD HOVER */
+body.dark .feature-box:hover,
+body.dark .how-box:hover {
+  background: #0d7f49 !important;
+}
+
+/* NAVBAR DARK */
+body.dark .navbar {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* LOGIN BUTTON DARK */
+body.dark .login-btn {
+  background: #18221e !important;
+  color: #b8ffe0 !important;
+}
+
+body.dark .login-btn:hover {
+  background: #23302b !important;
+}
+
+/* ICON BUTTONS DARK */
+body.dark .icon-btn {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.20) !important;
+}
+
+
 
 body {
   margin: 0;
@@ -34,101 +133,77 @@ body {
 }
 
 /* NAVBAR */
+/* NAVBAR — FINAL POLISHED VERSION */
+
+/* ========================= */
+/*        NAVBAR CSS         */
+/* ========================= */
 
 .navbar {
-  position: fixed;            /* stays at top while scrolling */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 75px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   padding: 0 40px;
 
-  backdrop-filter: blur(15px); /* GLASS EFFECT */
-  background: rgba(255, 255, 255, 0.05); /* transparent */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
 
-  color: white;
-  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+
+  z-index: 2000;
   transition: background 0.3s ease, border 0.3s ease;
 }
-.navbar.scrolled {
-  background: rgba(0, 0, 0, 0.3);   /* darker */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-}
 
-
-
+/* NAV INNER WRAPPER */
 .nav-inner {
   width: 100%;
-  max-width: 1400px;    /* keeps content centered */
-  padding: 0 30px;      /* small side padding */
-  
+  max-width: 1350px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
+/* LEFT LOGO */
+.nav-left {
+  flex: 0.9;
+  display: flex;
+  align-items: center;
+}
 
 .nav-title {
-  font-size: 24px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
 }
 
-.nav-links {
-  display: flex;
-  gap: 25px;
-  font-weight: 600;
-}
-
-.nav-links li {
-  cursor: pointer;
-  transition: 0.3s;
-  list-style: none;
-}
-
-.nav-links li:hover {
-  color: #b5ffca;
-}
-
-.login-btn {
-  background: white;
-  color: #0d7f49;
-  padding: 8px 18px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-.nav-left {
-  flex: 1; /* keeps logo on left */
-}
-
+/* CENTER NAV LINKS */
 .nav-center {
-  flex: 1; /* keeps menu centered */
+  flex: 2;
   display: flex;
   justify-content: center;
-  gap: 30px;
-  list-style: none;
+  gap: 40px;
+
   font-weight: 600;
+  list-style: none;
+  color: white;
 }
 
-.nav-right {
-  flex: 1; /* login stays in right zone */
-  display: flex;
-  justify-content: flex-end;
-}
 .nav-center li {
-  position: relative;
   cursor: pointer;
+  position: relative;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-center li:hover {
+  color: #d7ffe8;
 }
 
 .nav-center li::after {
@@ -145,6 +220,274 @@ body {
 .nav-center li:hover::after {
   width: 100%;
 }
+
+/* ========================= */
+/*      RIGHT SIDE BUTTONS   */
+/* ========================= */
+
+.nav-right {
+  flex: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;        /* spacing between Login & icon */
+  padding-right: 20px;
+}
+
+/* CLEAN LOGIN BUTTON */
+.login-btn {
+  background: white;
+  color: #0d7f49;
+  padding: 8px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.login-btn:hover {
+  background: #e8ffe7;
+}
+
+.arrow {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* SMALL ROUND ICON BUTTON */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.25s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.icon {
+  font-size: 18px;
+  color: white;
+}
+
+/* ========================= */
+/*        MOBILE NAV         */
+/* ========================= */
+
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .nav-center,
+  .nav-right {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 32px;
+    cursor: pointer;
+    color: white;
+  }
+}
+
+
+/* --- CLEAN PROFESSIONAL LOGIN BOX --- */
+
+.nav-profile-box {
+  background: rgba(255, 255, 255, 0.08);
+  /* backdrop-filter: blur(14px); */
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 4px 12px;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+
+  transition: 0.25s ease;
+}
+
+.nav-profile-box:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Inner login button */
+.login-btn {
+  background: white;
+  color: #0d7f49;
+
+  padding: 7px 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+
+  border-radius: 10px;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.login-btn:hover {
+  background: #f0faf3;
+}
+
+.arrow {
+  font-size: 13px;
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
+/* CENTER LINKS */
+.nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  color: white;
+  font-weight: 600;
+}
+
+.nav-center li {
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-center li:hover {
+  color: #b5ffca;
+}
+
+/* RIGHT LOGIN */
+/* ========================= */
+/*      RIGHT SIDE BUTTONS   */
+/* ========================= */
+
+.nav-right {
+  flex: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  padding-right: 20px;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+  background: white;
+  color: #0d7f49;
+  padding: 8px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.login-btn:hover {
+  background: #e8ffe7;
+}
+
+.arrow {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* ROUND ICON BUTTONS (theme + help) */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.25s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.icon {
+  font-size: 18px;
+  color: white;
+}
+
+/* THEME MODE STYLES */
+body.dark-mode {
+  background: #0b0f0c !important;
+  color: white;
+}
+
+body.dark-mode .navbar {
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .nav-title,
+body.dark-mode .nav-center li {
+  color: white;
+}
+
+body.dark-mode .icon {
+  color: white;
+}
+
+/* MOBILE */
+@media (max-width: 850px) {
+  .nav-center {
+    display: none;
+  }
+
+  .nav-right {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+  }
+}
+
 
 /* MOBILE NAVIGATION */
 
@@ -797,4 +1140,89 @@ body {
     bottom: 110%;
     transform: translateX(-20px) rotate(60deg);
   }
+}
+
+/* ========================= */
+/*      FAQ SLIDE DRAWER     */
+/* ========================= */
+
+.faq-drawer {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 3000;
+  padding: 20px;
+}
+
+body.dark .faq-drawer {
+  background: #121c18;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.6);
+}
+
+.faq-drawer.open {
+  right: 0;
+}
+
+/* Header */
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-header h2 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.faq-close {
+  cursor: pointer;
+  font-size: 22px;
+  opacity: 0.6;
+}
+
+.faq-close:hover {
+  opacity: 1;
+}
+
+/* FAQ Items */
+.faq-content {
+  margin-top: 20px;
+}
+
+.faq-item {
+  background: #f3f3f3;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.faq-item:hover {
+  background: #e7e7e7;
+}
+
+body.dark .faq-item {
+  background: #18221e;
+  color: #cdeadd;
+}
+
+body.dark .faq-item:hover {
+  background: #1f2f2a;
+}
+
+/* Overlay */
+.faq-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+  z-index: 2500;
 }

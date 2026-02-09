@@ -10,111 +10,53 @@ import "./App.css";
 
 export default function App() {
   useEffect(() => {
-    // ---------------------------
-    // 1. Fade-in + Fade-up animations
-    // ---------------------------
+    // Restore theme
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") document.body.classList.add("dark");
+
     animateOnScroll();
 
-    // ---------------------------
-    // 2. Sticky Navbar Scroll Effect
-    // ---------------------------
+    const navbar = document.querySelector(".navbar");
+
     const handleScroll = () => {
-      const navbar = document.querySelector(".navbar");
-      if (window.scrollY > 30) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
+      navbar.classList.toggle("scrolled", window.scrollY > 30);
+    };
+
+    const progressBar = document.querySelector(".scroll-progress");
+    const updateProgressBar = () => {
+      const scrollTop = window.scrollY;
+      const height =
+        document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrollTop / height) * 100 + "%";
+    };
+
+    const parallax = () => {
+      const hero = document.querySelector(".hero");
+      if (hero) {
+        hero.style.backgroundPositionY = window.pageYOffset * 0.3 + "px";
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // ---------------------------
-    // 3. Parallax Hero Background
-    // ---------------------------
-    const parallax = () => {
-      const hero = document.querySelector(".hero");
-      if (hero) {
-        let offset = window.pageYOffset;
-        hero.style.backgroundPositionY = offset * 0.3 + "px";
-      }
-    };
-
+    window.addEventListener("scroll", updateProgressBar);
     window.addEventListener("scroll", parallax);
 
-    // ---------------------------
-    // 4. Hero Image Slide-In Animation
-    // ---------------------------
-    const heroImg = document.querySelector(".hero-img");
-
-    const imgObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && heroImg) {
-          heroImg.classList.add("show");
-          imgObserver.disconnect(); // Only animate once
-        }
-      });
-    });
-
-    if (heroImg) imgObserver.observe(heroImg);
-
-    // ---------------------------
-    // 5. Scroll Progress Bar
-    // ---------------------------
-    const progressBar = document.querySelector(".scroll-progress");
-
-    const updateProgressBar = () => {
-      const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      progressBar.style.width = progress + "%";
-    };
-
-    window.addEventListener("scroll", updateProgressBar);
-
-    // ---------------------------
-    // Cleanup Listeners
-    // ---------------------------
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scroll", parallax);
       window.removeEventListener("scroll", updateProgressBar);
+      window.removeEventListener("scroll", parallax);
     };
   }, []);
 
   return (
     <>
-      {/* SCROLL PROGRESS BAR */}
       <div className="scroll-progress"></div>
-
-      {/* NAVBAR */}
       <Navbar />
-
-      {/* HERO */}
-      <div className="fade-in">
-        <Hero />
-      </div>
-
-      {/* STATS */}
-      <div className="fade-up">
-        <Stats />
-      </div>
-
-      {/* FEATURES */}
-      <div className="fade-up">
-        <Features />
-      </div>
-
-      {/* HOW IT WORKS */}
-      <div className="fade-up">
-        <HowItWorks />
-      </div>
-
-      {/* FOOTER */}
-      <div className="fade-in">
-        <Footer />
-      </div>
+      <div className="fade-in"><Hero /></div>
+      <div className="fade-up"><Stats /></div>
+      <div className="fade-up"><Features /></div>
+      <div className="fade-up"><HowItWorks /></div>
+      <div className="fade-in"><Footer /></div>
     </>
   );
 }
