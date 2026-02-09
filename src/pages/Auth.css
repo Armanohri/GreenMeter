@@ -1,101 +1,211 @@
-.auth-wrapper {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
+/* ============================================== */
+/* 1. ROOT COLOR VARIABLES                        */
+/* ============================================== */
 
-  background: linear-gradient(135deg, #0f9d58, #34a853);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+:root {
+  /* Light Mode Colors */
+  --bg-gradient: linear-gradient(135deg, #d8f9d2, #e4ffe9, #d2f7cc);
+  --card-bg: rgba(255, 255, 255, 0.35);
+  --card-border: rgba(255, 255, 255, 0.55);
+  --text-main: #2a5f46;
+  --text-sub: #2d2d2d;
+  --line-color: #7aa894;
+  --button-bg: #3d7f63;
+  --button-bg-hover: #2f6b51;
 
-  z-index: 9999; /* forces it above App */
+  --blob1: radial-gradient(circle, #4cd66a, #1c8c39);
+  --blob2: radial-gradient(circle, #4cd66a, #1c8c39);
+  --blob3: radial-gradient(circle, #4cd66a, #1c8c39);
 }
+
+/* ============================================== */
+/* 2. DARK MODE VARIABLES                          */
+/* ============================================== */
+
+.dark {
+  --bg-gradient: linear-gradient(135deg, #0b1d0f, #0a2613, #0c2e17);
+
+  --card-bg: rgba(20, 40, 28, 0.45);
+  --card-border: rgba(255, 255, 255, 0.15);
+
+  --text-main: #c8ffd7;
+  --text-sub: #e8ffe9;
+
+  --line-color: #79c296;
+
+  --button-bg: #1c8c48;
+  --button-bg-hover: #146b37;
+
+  --blob1: radial-gradient(circle, #1c8c39, #093d1c);
+  --blob2: radial-gradient(circle, #1c8c39, #093d1c);
+  --blob3: radial-gradient(circle, #1c8c39, #093d1c);
+}
+
+/* ============================================== */
+/* 3. MAIN WRAPPER                                 */
+/* ============================================== */
 
 .auth-container {
-  width: 100%;
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
   height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  /* Beautiful green gradient full width */
-  background: linear-gradient(135deg, #0f9d58, #34a853);
+  background: var(--bg-gradient);
+  overflow: hidden;
+  z-index: 999;
+
+  transition: background 0.4s ease-in-out;
 }
 
-.auth-box {
-  width: 380px;
-  padding: 40px;
-  border-radius: 20px;
+/* ============================================== */
+/* 4. BLOBS                                        */
+/* ============================================== */
 
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-
-  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0.85;
+  transition: 0.4s ease-in-out;
 }
+
+.blob1 {
+  width: 250px;
+  height: 250px;
+  top: 10%;
+  left: 5%;
+  background: var(--blob1);
+}
+.blob2 {
+  width: 200px;
+  height: 200px;
+  right: 5%;
+  top: 20%;
+  background: var(--blob2);
+}
+.blob3 {
+  width: 180px;
+  height: 180px;
+  bottom: 5%;
+  right: 30%;
+  background: var(--blob3);
+}
+
+/* ============================================== */
+/* 5. GLASS CARD                                   */
+/* ============================================== */
+
+.auth-card {
+  width: 95%;
+  max-width: 520px;
+  padding: 60px 55px;
+
+  border-radius: 35px;
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  border: 2px solid var(--card-border);
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 10;
+  animation: fadeIn 0.8s ease-out;
+
+  transition: background 0.4s, border 0.4s;
+}
+
+/* ============================================== */
+/* 6. TEXT & INPUTS                                */
+/* ============================================== */
 
 .auth-title {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
-  margin-bottom: 10px;
-  text-align: center;
-  color: #1a1a1a;
-}
-
-.auth-subtitle {
+  color: var(--text-main);
   text-align: center;
   margin-bottom: 25px;
-  color: #666;
+  transition: 0.4s;
 }
 
 .auth-input {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin-bottom: 15px;
-  font-size: 15px;
+  padding: 12px 5px;
+  margin-bottom: 28px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--line-color);
+
+  font-size: 16px;
+  color: var(--text-sub);
+
   outline: none;
+  transition: 0.3s ease;
 }
+
+.auth-input:focus {
+  border-color: var(--text-main);
+}
+
+/* ============================================== */
+/* 7. BUTTON                                       */
+/* ============================================== */
 
 .auth-btn {
   width: 100%;
-  padding: 12px;
-  background: #0f9d58;
-  border: none;
-  color: white;
-  font-size: 17px;
-  border-radius: 10px;
-  margin-top: 5px;
-  cursor: pointer;
+  padding: 15px;
+  font-size: 18px;
   font-weight: 600;
+
+  background: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition: 0.25s;
 }
 
 .auth-btn:hover {
-  background: #0b7c45;
+  background: var(--button-bg-hover);
 }
 
-.auth-footer {
+/* ============================================== */
+/* 8. LINK                                         */
+/* ============================================== */
+
+.auth-link {
+  margin-top: 18px;
   text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-  color:black;
 }
 
-.auth-footer a {
+.auth-link a {
   font-weight: 600;
-  color:black;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: 0.3s;
 }
-.auth-error {
-  width: 100%;
-  padding: 10px;
-  background: #ffebee;
-  color: #c62828;
-  border: 1px solid #ffcdd2;
-  border-radius: 8px;
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 14px;
-  font-weight: 600;
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================== */
+/* 9. FADE ANIMATION                               */
+/* ============================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

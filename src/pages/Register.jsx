@@ -1,8 +1,8 @@
-import "./Auth.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import "./auth.css";
+import { Link } from "react-router-dom";
 
-function Register() {
+export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,66 +10,56 @@ function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-
     if (!name || !email || !password) {
-      setError("Please fill out all fields.");
+      setError("All fields are required");
       return;
     }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
-
     setError("");
-    alert("Frontend Register Successful (No backend connected)");
+    console.log("Registered:", name, email, password);
   };
 
   return (
-    <div className="auth-wrapper">
-      <form className="auth-box" onSubmit={handleRegister}>
+    <div className="auth-container">
+      <div className="auth-card">
         <h2 className="auth-title">Create Account</h2>
-        <p className="auth-subtitle">Join us to get started</p>
+        <p className="auth-subtitle">Join the GreenMeter community</p>
 
-        {error && <p className="auth-error">{error}</p>}
+        {error && <div className="error-text">{error}</div>}
 
-        <input
-          type="text"
-          className="auth-input"
-          placeholder="Full Name"
-          onChange={(e) => setName(e.target.value)}
-        />
+        <form onSubmit={handleRegister}>
+          <input
+            type="text"
+            className="auth-input"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-        <input
-          type="email"
-          className="auth-input"
-          placeholder="Email Address"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <input
+            type="email"
+            className="auth-input"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <input
-          type="password"
-          className="auth-input"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <input
+            type="password"
+            className="auth-input"
+            placeholder="Create Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <button className="auth-btn" type="submit">
-          Register
-        </button>
+          <button type="submit" className="auth-btn">
+            Register
+          </button>
+        </form>
 
-        <p className="auth-footer">
-          Already have an account? <Link to="/login">Log In</Link>
+        <p className="auth-link">
+          Already have an account? <Link to="/login">Login</Link>
         </p>
-      </form>
+      </div>
     </div>
   );
 }
-
-export default Register;

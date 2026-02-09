@@ -17,7 +17,9 @@ export default function Navbar() {
 
   const toggleTheme = () => {
     const body = document.body;
-    if (body.classList.contains("dark")) {
+    const isDark = body.classList.contains("dark");
+
+    if (isDark) {
       body.classList.remove("dark");
       localStorage.setItem("theme", "light");
       setDarkMode(false);
@@ -30,12 +32,10 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="scroll-progress"></div>
-
       <nav className="navbar">
         <div className="nav-inner">
 
-          {/* LEFT LOGO */}
+          {/* LOGO */}
           <div className="nav-left">
             <h1 className="nav-title">🌱 GreenMeter</h1>
           </div>
@@ -49,25 +49,25 @@ export default function Navbar() {
             <li>FAQs</li>
           </ul>
 
-          {/* RIGHT BUTTONS */}
+          {/* RIGHT */}
           <div className="nav-right">
+
+            {/* THEME TOGGLE */}
             <button className="icon-btn" onClick={toggleTheme}>
               <span className="icon">{darkMode ? "☀️" : "🌙"}</span>
             </button>
 
-            {/* HELP → FAQ DRAWER */}
             <button className="icon-btn" onClick={() => setFaqOpen(true)}>
               <span className="icon">❔</span>
             </button>
 
-            <button className="login-btn">
-              Log In <span className="arrow">▾</span>
-            </button>
+            <Link to="/login" className="login-btn">
+              Log In
+            </Link>
           </div>
 
-          <div className="hamburger" onClick={() => setMenuOpen(true)}>
-            ☰
-          </div>
+          {/* MOBILE MENU ICON */}
+          <div className="hamburger" onClick={() => setMenuOpen(true)}>☰</div>
         </div>
       </nav>
 
@@ -85,23 +85,21 @@ export default function Navbar() {
           <div className="faq-item">👉 How do I track my daily usage?</div>
           <div className="faq-item">👉 Why is my score low?</div>
           <div className="faq-item">👉 How do I improve my efficiency?</div>
-          <div className="faq-item">👉 Contact Support</div>
         </div>
       </div>
 
-      {/* FAQ OVERLAY */}
       {faqOpen && <div className="faq-overlay" onClick={() => setFaqOpen(false)}></div>}
 
-      {/* MOBILE PANEL */}
+      {/* MOBILE MENU */}
       <div className={`mobile-menu-panel ${menuOpen ? "open" : ""}`}>
         <div className="close-btn" onClick={() => setMenuOpen(false)}>✕</div>
+
         <ul>
           <li onClick={() => setMenuOpen(false)}>Home</li>
           <li onClick={() => setMenuOpen(false)}>Features</li>
           <li onClick={() => setMenuOpen(false)}>How it Works</li>
           <li onClick={() => setMenuOpen(false)}>Blog</li>
           <li onClick={() => setMenuOpen(false)}>FAQs</li>
-
           <li>
             <Link to="/login" onClick={() => setMenuOpen(false)}>
               Log In
