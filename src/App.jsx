@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -16,9 +16,9 @@ import { animateOnScroll } from "./scrollAnimation";
 import "./App.css";
 
 export default function App() {
-
   const location = useLocation();
   const isDashboard = location.pathname === "/dashboard";
+  const token = localStorage.getItem("token");
 
   // Apply dark mode before load
   useEffect(() => {
@@ -33,11 +33,13 @@ export default function App() {
     animateOnScroll();
 
     const navbar = document.querySelector(".navbar");
+
     const handleScroll = () => {
       navbar?.classList.toggle("scrolled", window.scrollY > 30);
     };
 
     const progressBar = document.querySelector(".scroll-progress");
+
     const updateProgressBar = () => {
       if (!progressBar) return;
       const scrollTop = window.scrollY;
@@ -67,7 +69,7 @@ export default function App() {
     <>
       <div className="scroll-progress"></div>
 
-      {/* Hide main navbar on dashboard */}
+      {/* Hide navbar on dashboard */}
       {!isDashboard && <Navbar />}
 
       <Routes>
@@ -86,12 +88,28 @@ export default function App() {
           }
         />
 
-        {/* AUTH PAGES */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        {/* AUTH ROUTES */}
+        <Route
+          path="/login"
+          element={
+            token ? <Navigate to="/dashboard" /> : <Login />
+          }
+        />
 
-        {/* DASHBOARD */}
-        <Route path="/dashboard" element={<UserHome />} />
+        <Route
+          path="/register"
+          element={
+            token ? <Navigate to="/dashboard" /> : <Register />
+          }
+        />
+
+        {/* PROTECTED DASHBOARD */}
+        <Route
+          path="/dashboard"
+          element={
+            token ? <UserHome /> : <Navigate to="/login" />
+          }
+        />
 
       </Routes>
     </>

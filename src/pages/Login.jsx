@@ -1,62 +1,64 @@
 import { useState } from "react";
-import "./auth.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "./Auth.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const navigate = useNavigate();   // ✅ React Router redirect
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      alert("Please enter email & password");
-      return;
+    try {
+      const res = await fetch("http://127.0.0.1:8000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.access_token);
+        navigate("/dashboard");
+      } else {
+        alert(data.detail);
+      }
+    } catch (error) {
+      alert("Server error");
     }
-
-    // save login state
-    localStorage.setItem("loggedIn", "true");
-
-    // navigate without refreshing
-    navigate("/dashboard");  // ✅ FIX
   };
 
   return (
     <div className="auth-container">
+      <h2>Login</h2>
 
-      <div className="blob blob1"></div>
-      <div className="blob blob2"></div>
-      <div className="blob blob3"></div>
-
-      <div className="auth-card">
-        <h2 className="auth-title">LOGIN</h2>
-
+      <form onSubmit={handleLogin}>
         <input
           type="email"
-          className="auth-input"
-          placeholder="Email Address"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
           type="password"
-          className="auth-input"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
-        <button className="auth-btn" onClick={handleLogin}>
-          SIGN IN
-        </button>
+        <button type="submit">Login</button>
+      </form>
 
-        <p className="auth-link">
-          Don’t have an account? <Link to="/register">Register</Link>
-        </p>
-      </div>
+      <p>
+        Don’t have an account? <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 }
