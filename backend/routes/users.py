@@ -15,10 +15,17 @@ async def register(user: UserCreate):
 
     hashed = hash_password(user.password)
 
-    await users_collection.insert_one({
+    user_data = {
         "email": user.email,
         "password": hashed
-    })
+    }
+    
+    if user.first_name:
+        user_data["first_name"] = user.first_name
+    if user.last_name:
+        user_data["last_name"] = user.last_name
+
+    await users_collection.insert_one(user_data)
 
     return {"message": "User registered successfully"}
 
@@ -46,8 +53,33 @@ async def login(user: UserLogin):
 async def get_current_user(authorization: str = Header(...)):
     token = authorization.replace("Bearer ", "")
     payload = verify_token(token)
-
+    
+    email = payload["sub"]
+    db_user = await users_collection.find_one({"email": email})
+    
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    user_data = {
+        "email": db_user.get("email"),
+        "first_name": db_user.get("first_name", ""),
+        "last_name": db_user.get("last_name", "")
+    }
+    
+    # Create full name
+    full_name = ""
+    if user_data["first_name"] and user_data["last_name"]:
+        full_name = f"{user_data['first_name']} {user_data['last_name']}"
+    elif user_data["first_name"]:
+        full_name = user_data["first_name"]
+    elif user_data["last_name"]:
+        full_name = user_data["last_name"]
+    else:
+        full_name = user_data["email"].split("@")[0]  # Fallback to email username
+    
     return {
-        "message": "Protected route accessed",
-        "user": payload["sub"]
+        "user": full_name,
+        "email": user_data["email"],
+        "first_name": user_data["first_name"],
+        "last_name": user_data["last_name"]
     }

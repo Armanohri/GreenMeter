@@ -4,6 +4,12 @@
 /* ========================================= */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 /* When navbar becomes solid on scroll */
 .navbar.scrolled {
@@ -149,6 +155,12 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   background: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Ensure hero section covers full width */
+.hero {
+  width: 100vw;
   overflow-x: hidden;
 }
 .features {
@@ -627,6 +639,7 @@ body.dark-mode .icon {
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
+  margin: 0 auto;
 }
 
 .hero-right {
@@ -953,13 +966,15 @@ body.dark-mode .icon {
  /* --- NEW SPLIT HERO LAYOUT --- */
 
 .hero {
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   background: linear-gradient(to bottom, #0d7f49, #29b36f, #1fa062);
   padding-top: 140px; /* space for navbar */
   padding-bottom: 60px;
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .hero-inner {
@@ -1131,6 +1146,11 @@ body.dark-mode .icon {
 }
 
 .fade-in.show {
+  opacity: 1;
+}
+
+/* Ensure hero section is visible immediately when page loads */
+#home.fade-in {
   opacity: 1;
 }
 

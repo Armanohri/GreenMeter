@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -30,11 +33,33 @@ export default function Navbar() {
     }
   };
 
-  // Smooth Scroll
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+  // Smooth Scroll or Navigate
+  const handleNavClick = (id) => {
+    if (isHomePage) {
+      // On home page, scroll to section
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // On other pages, navigate to home with hash
+      navigate(`/#${id}`);
+      // After navigation, scroll to section
+      setTimeout(() => {
+        const section = document.getElementById(id);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  };
+
+  // Handle Home click
+  const handleHomeClick = () => {
+    if (isHomePage) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
     }
   };
 
@@ -45,22 +70,17 @@ export default function Navbar() {
 
           {/* LOGO */}
           <div className="nav-left">
-            <h1 className="nav-title">🌱 GreenMeter</h1>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <h1 className="nav-title">🌱 GreenMeter</h1>
+            </Link>
           </div>
 
           {/* NAV LINKS */}
           <ul className="nav-center">
-            <li onClick={() => scrollToSection("home")}>Home</li>
-
-            {/* 🔥 REMOVED LOGIN CHECK HERE */}
-            <li onClick={() => scrollToSection("features")}>Features</li>
-
-            {/* 🔥 REMOVED LOGIN CHECK HERE */}
-            <li onClick={() => scrollToSection("howitworks")}>How it Works</li>
-
-            {/* 🔥 REMOVED LOGIN CHECK HERE */}
-            <li onClick={() => scrollToSection("blog")}>Blog</li>
-
+            <li onClick={handleHomeClick}>Home</li>
+            <li onClick={() => handleNavClick("features")}>Features</li>
+            <li onClick={() => handleNavClick("howitworks")}>How it Works</li>
+            <li onClick={() => handleNavClick("blog")}>Blog</li>
             <li onClick={() => setFaqOpen(true)}>FAQs</li>
           </ul>
 
@@ -108,10 +128,10 @@ export default function Navbar() {
         <div className="close-btn" onClick={() => setMenuOpen(false)}>✕</div>
 
         <ul>
-          <li onClick={() => { scrollToSection("home"); setMenuOpen(false); }}>Home</li>
-          <li onClick={() => { scrollToSection("features"); setMenuOpen(false); }}>Features</li>
-          <li onClick={() => { scrollToSection("howitworks"); setMenuOpen(false); }}>How it Works</li>
-          <li onClick={() => { scrollToSection("blog"); setMenuOpen(false); }}>Blog</li>
+          <li onClick={() => { handleHomeClick(); setMenuOpen(false); }}>Home</li>
+          <li onClick={() => { handleNavClick("features"); setMenuOpen(false); }}>Features</li>
+          <li onClick={() => { handleNavClick("howitworks"); setMenuOpen(false); }}>How it Works</li>
+          <li onClick={() => { handleNavClick("blog"); setMenuOpen(false); }}>Blog</li>
           <li onClick={() => { setFaqOpen(true); setMenuOpen(false); }}>FAQs</li>
           <li>
             <Link to="/login" onClick={() => setMenuOpen(false)}>

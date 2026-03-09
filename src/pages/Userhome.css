@@ -1,116 +1,607 @@
-/* FIX FULL WIDTH BACKGROUND */
+/* ============================================== */
+/* DASHBOARD WRAPPER                              */
+/* ============================================== */
+
 .userhome-wrapper {
-  padding-top: 140px;
   min-height: 100vh;
   width: 100%;
+  padding: 100px 20px 40px 20px;
+  background: linear-gradient(135deg, #f0fff4 0%, #e8ffe7 100%);
+  transition: background 0.3s ease;
 }
 
-/* LIGHT MODE BACKGROUND */
-.light-mode .userhome-wrapper {
-  background: #f0fff4;
+body.dark .userhome-wrapper {
+  background: linear-gradient(135deg, #0a1410 0%, #0c1a14 100%);
 }
 
-/* DARK MODE BACKGROUND - FULL BLACK */
-.dark-mode .userhome-wrapper {
-  background: #000 !important;
-}
+/* ============================================== */
+/* USER INFO SECTION (TOP)                       */
+/* ============================================== */
 
-/* HEADING */
-.uh-header h1 {
-  font-size: 46px;
-  font-weight: 900;
-  color: #0d7f49;
-}
-
-.dark-mode .uh-header h1 {
-  color: #ffffff;
-}
-
-.uh-header p {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #444;
-}
-
-.dark-mode .uh-header p {
-  color: #bbbbbb;
-}
-
-/* GRID */
-.uh-grid {
-  margin: 55px auto;
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-}
-
-/* CARD (LIGHT MODE) */
-.uh-card {
-  background: #ffffff;
-  padding: 32px;
+.user-info-section {
+  max-width: 1400px;
+  margin: 0 auto 40px auto;
+  padding: 30px 40px;
+  background: white;
   border-radius: 20px;
-  box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
-  border: 1px solid #caffdd;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
-/* CARD (DARK MODE) */
-.dark-mode .uh-card {
-  background: #111;
-  border: 1px solid #222;
-  box-shadow: 0px 12px 32px rgba(0,0,0,0.5);
+body.dark .user-info-section {
+  background: #111a16;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.uh-card:hover {
-  transform: translateY(-6px);
+.user-info-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* TEXTS */
-.uh-card h3 {
+.user-greeting h1 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0d7f49;
+  margin: 0 0 8px 0;
+  transition: color 0.3s;
+}
+
+body.dark .user-greeting h1 {
+  color: #4ade80;
+}
+
+.user-greeting p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+body.dark .user-greeting p {
+  color: #b0d4b8;
+}
+
+.user-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.profile-btn,
+.logout-btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-btn {
+  background: #0d7f49;
+  color: white;
+}
+
+.profile-btn:hover {
+  background: #0a6b3d;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+body.dark .logout-btn {
+  background: #1f2f2a;
+  color: #c8ffd7;
+}
+
+.logout-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+body.dark .logout-btn:hover {
+  background: #2a3f35;
+}
+
+/* ============================================== */
+/* DASHBOARD SECTIONS                             */
+/* ============================================== */
+
+.dashboard-section {
+  max-width: 1400px;
+  margin: 0 auto 40px auto;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0d7f49;
+  margin-bottom: 24px;
+  transition: color 0.3s;
+}
+
+body.dark .section-title {
+  color: #4ade80;
+}
+
+/* ============================================== */
+/* CARBON CALCULATOR SHORTCUT                     */
+/* ============================================== */
+
+.carbon-calculator-card {
+  background: linear-gradient(135deg, #0d7f49 0%, #1fa062 100%);
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  box-shadow: 0 8px 30px rgba(13, 127, 73, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.carbon-calculator-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(13, 127, 73, 0.4);
+}
+
+.calculator-icon {
+  font-size: 64px;
+  flex-shrink: 0;
+}
+
+.calculator-content {
+  flex: 1;
+  color: white;
+}
+
+.calculator-content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.calculator-content p {
+  font-size: 16px;
+  opacity: 0.95;
+  margin: 0 0 20px 0;
+}
+
+.calculator-btn {
+  background: white;
+  color: #0d7f49;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.calculator-btn:hover {
+  background: #f0faf3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================== */
+/* DASHBOARD STATS PANEL                          */
+/* ============================================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.stat-card {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+body.dark .stat-card {
+  background: #111a16;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: #0d7f49;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.stat-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.dark .stat-card h3 {
+  color: #8ea59c;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0d7f49;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+
+body.dark .stat-value {
+  color: #4ade80;
+}
+
+.stat-change {
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.stat-change.positive {
+  color: #059669;
+  background: #d1fae5;
+}
+
+body.dark .stat-change.positive {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.15);
+}
+
+.stat-change.negative {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+body.dark .stat-change.negative {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.15);
+}
+
+/* ============================================== */
+/* TRANSPORT COMPARISON TOOL                      */
+/* ============================================== */
+
+.transport-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.transport-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+body.dark .transport-card {
+  background: #111a16;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.transport-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.transport-card.recommended {
+  border-color: #0d7f49;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+body.dark .transport-card.recommended {
+  background: linear-gradient(135deg, #0f1f15 0%, #132a1c 100%);
+  border-color: #4ade80;
+}
+
+.transport-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.transport-card h3 {
   font-size: 20px;
   font-weight: 700;
   color: #0d7f49;
+  margin: 0 0 16px 0;
+  transition: color 0.3s;
 }
 
-.dark-mode .uh-card h3 {
-  color: #ffffff;
+body.dark .transport-card h3 {
+  color: #4ade80;
 }
 
-.uh-value {
-  margin-top: 8px;
-  font-size: 30px;
-  font-weight: 800;
-  color: #000;
+.transport-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.dark-mode .uh-value {
-  color: #ffffff;
-}
-
-.uh-card span {
-  margin-top: 6px;
+.transport-stat {
   font-size: 14px;
   color: #666;
+  padding: 8px;
+  background: #f9fafb;
+  border-radius: 8px;
 }
 
-.dark-mode .uh-card span {
-  color: #bbbbbb;
+body.dark .transport-stat {
+  color: #b0d4b8;
+  background: #1a2520;
 }
 
-/* RESPONSIVENESS */
-@media (max-width: 1100px) {
-  .uh-grid {
-    grid-template-columns: repeat(2, 1fr);
+.recommended-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #0d7f49;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+body.dark .recommended-badge {
+  background: #4ade80;
+  color: #0a1410;
+}
+
+/* ============================================== */
+/* GOAL TRACKER                                   */
+/* ============================================== */
+
+.goals-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.goal-card {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+body.dark .goal-card {
+  background: #111a16;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.goal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.goal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0d7f49;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+body.dark .goal-header h3 {
+  color: #4ade80;
+}
+
+.goal-progress {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0d7f49;
+  transition: color 0.3s;
+}
+
+body.dark .goal-progress {
+  color: #4ade80;
+}
+
+.goal-progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+body.dark .goal-progress-bar {
+  background: #1a2520;
+}
+
+.goal-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0d7f49 0%, #1fa062 100%);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+body.dark .goal-progress-fill {
+  background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+}
+
+.goal-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+body.dark .goal-description {
+  color: #8ea59c;
+}
+
+/* ============================================== */
+/* LEADERBOARD                                    */
+/* ============================================== */
+
+.leaderboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.leaderboard-item {
+  background: white;
+  padding: 20px 24px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+body.dark .leaderboard-item {
+  background: #111a16;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.leaderboard-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.leaderboard-item.top {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #fbbf24;
+}
+
+body.dark .leaderboard-item.top {
+  background: linear-gradient(135deg, #1a1a0a 0%, #2a2a14 100%);
+  border-color: #fbbf24;
+}
+
+.leaderboard-item.current {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 2px solid #3b82f6;
+}
+
+body.dark .leaderboard-item.current {
+  background: linear-gradient(135deg, #0a1a2a 0%, #142a3a 100%);
+  border-color: #3b82f6;
+}
+
+.leaderboard-rank {
+  font-size: 32px;
+  flex-shrink: 0;
+  width: 50px;
+  text-align: center;
+}
+
+.leaderboard-info {
+  flex: 1;
+}
+
+.leaderboard-info h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0d7f49;
+  margin: 0 0 4px 0;
+  transition: color 0.3s;
+}
+
+body.dark .leaderboard-info h4 {
+  color: #4ade80;
+}
+
+.leaderboard-info p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+body.dark .leaderboard-info p {
+  color: #8ea59c;
+}
+
+.leaderboard-score {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0d7f49;
+  transition: color 0.3s;
+}
+
+body.dark .leaderboard-score {
+  color: #4ade80;
+}
+
+/* ============================================== */
+/* RESPONSIVE DESIGN                              */
+/* ============================================== */
+
+@media (max-width: 768px) {
+  .userhome-wrapper {
+    padding: 80px 15px 30px 15px;
   }
-}
 
-@media (max-width: 700px) {
-  .uh-grid {
+  .user-info-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-greeting h1 {
+    font-size: 28px;
+  }
+
+  .carbon-calculator-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .calculator-content h2 {
+    font-size: 24px;
+  }
+
+  .stats-grid {
     grid-template-columns: 1fr;
   }
 
-  .uh-header h1 {
-    font-size: 34px;
+  .transport-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .goals-container {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 24px;
   }
 }

@@ -30,7 +30,21 @@ export default function App() {
 
   // Animations & navbar behavior
   useEffect(() => {
-    animateOnScroll();
+    // Always run animations, but especially when on home page
+    if (location.pathname === "/") {
+      // Small delay to ensure DOM is ready after navigation
+      const timer = setTimeout(() => {
+        // Scroll to top first
+        window.scrollTo({ top: 0, behavior: "instant" });
+        // Then trigger animations
+        animateOnScroll();
+      }, 100);
+      
+      return () => clearTimeout(timer);
+    } else {
+      // Run animations on other pages too (for any fade elements)
+      animateOnScroll();
+    }
 
     const navbar = document.querySelector(".navbar");
 
@@ -63,7 +77,7 @@ export default function App() {
       window.removeEventListener("scroll", updateProgressBar);
       window.removeEventListener("scroll", parallax);
     };
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
