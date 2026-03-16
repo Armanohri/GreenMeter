@@ -1,7 +1,35 @@
 /* GLOBAL */
 /* ========================================= */
-/*          GLOBAL DARK MODE SYSTEM          */
+/*          GLOBAL THEME SYSTEM              */
 /* ========================================= */
+
+:root {
+  /* Light theme */
+  --page-bg: #ffffff;
+  --page-text: #111111;
+  --primary: #0d7f49;
+  --primary-soft: #29b36f;
+  --primary-soft-2: #1fa062;
+  --card-bg-light: #ffffff;
+  --card-border-light: #e5e5e5;
+  --hero-gradient: linear-gradient(to bottom, #0d7f49, #29b36f, #1fa062);
+  --footer-bg: #0d7f49;
+  --accent-warning: #fbbf24;
+}
+
+body.dark {
+  /* Dark theme overrides */
+  --page-bg: #020817;
+  --page-text: #cbd5f5;
+  --primary: #16a34a;
+  --primary-soft: #22c55e;
+  --primary-soft-2: #4ade80;
+  --card-bg-light: #020617;
+  --card-border-light: #1f2937;
+  --hero-gradient: radial-gradient(circle at top, #020617, #020617 30%, #111827 100%);
+  --footer-bg: #020617;
+  --accent-warning: #facc15;
+}
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -57,8 +85,8 @@ body.dark .navbar.scrolled .icon-btn {
 
 /* LIGHT DEFAULT */
 body {
-  background: #ffffff;
-  color: #111;
+  background: var(--page-bg);
+  color: var(--page-text);
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -71,24 +99,18 @@ body.dark {
   --bg-card: #111a16;
 }
 
-/* Apply dark background */
-body.dark {
-  background: var(--bg-dark) !important;
-  color: var(--text-sub) !important;
-}
-
 /* MAIN HEADINGS */
 body.dark h1,
 body.dark h2,
 body.dark h3 {
-  color: var(--text-main) !important;
+  color: var(--page-text) !important;
 }
 
 /* PARAGRAPHS + DESCRIPTIONS */
 body.dark p,
 body.dark .feature-text,
 body.dark .how-text {
-  color: var(--text-sub) !important;
+  color: var(--page-text) !important;
 }
 
 /* NAV LINKS */
@@ -185,7 +207,7 @@ body {
   left: 0;
   height: 5px;                /* thickness of bar */
   width: 0%;                  /* will grow with scroll */
-  background: #0d7f49;        /* green color */
+  background: var(--primary);        /* theme color */
   z-index: 9999;
   transition: width 0.15s ease-out;
 }
@@ -560,7 +582,7 @@ body.dark-mode .icon {
 .hero {
   width: 100%;
   min-height: 80vh;
-  background: linear-gradient(to bottom, #0d7f49, #29b36f, #1fa062);
+  background: var(--hero-gradient);
   background-size: cover;
   background-repeat: no-repeat;
 
@@ -604,7 +626,7 @@ body.dark-mode .icon {
 
 .btn1 {
   background: white;
-  color: #0d7f49;
+  color: var(--primary);
   padding: 12px 30px;
   border-radius: 8px;
   font-weight: 600;
@@ -672,7 +694,7 @@ body.dark-mode .icon {
 .stat-title {
   font-size: 32px;
   font-weight: bold;
-  color: #0d7f49;
+  color: var(--primary);
 }
 
 .stat-text {
@@ -703,7 +725,7 @@ body.dark-mode .icon {
 }
 
 .feature-box {
-  background: white;
+  background: var(--card-bg-light);
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.08);
@@ -734,7 +756,7 @@ body.dark-mode .icon {
 }
 /* HOVER STATE */
 .feature-box:hover {
-  background: #0d7f49; /* green */
+  background: var(--primary); /* green */
   transform: translateY(-6px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
 }
@@ -803,7 +825,7 @@ body.dark-mode .icon {
 }
 
 .how-box {
-  background: #f3f3f3;
+  background: var(--card-bg-light);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 8px 15px rgba(0,0,0,0.08);
@@ -840,7 +862,7 @@ body.dark-mode .icon {
 
 /* Hover Effect (same as features) */
 .how-box:hover {
-  background: #0d7f49;  /* green */
+  background: var(--primary);  /* green */
   transform: translateY(-6px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
 }
@@ -879,7 +901,7 @@ body.dark-mode .icon {
 /* FOOTER */
 
 .footer {
-  background: #0d7f49;
+  background: var(--footer-bg);
   color: white;
   padding: 50px 40px;
   margin-top: 60px;

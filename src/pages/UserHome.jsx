@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DashboardSidebar from "../components/DashboardSidebar";
 import "./Userhome.css";
 
 export default function UserHome() {
@@ -48,7 +49,7 @@ export default function UserHome() {
 
   if (loading) {
     return (
-      <div className="userhome-wrapper">
+      <div className="dash-layout">
         <div style={{ textAlign: "center", padding: "50px" }}>
           <p>Loading...</p>
         </div>
@@ -57,9 +58,11 @@ export default function UserHome() {
   }
 
   return (
-    <div className="userhome-wrapper">
-      {/* User Info Section (Top) */}
-      <div className="user-info-section">
+    <div className="dash-layout">
+      <DashboardSidebar onLogout={handleLogout} />
+      <div className="userhome-wrapper">
+        {/* User Info Section (Top) */}
+      <div className="user-info-section" id="top-dashboard">
         <div className="user-info-content">
           <div className="user-greeting">
             <h1>Welcome back, {user || "User"}! 👋</h1>
@@ -69,15 +72,12 @@ export default function UserHome() {
             <button className="profile-btn" onClick={() => alert("Profile settings coming soon!")}>
               Profile
             </button>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
           </div>
         </div>
       </div>
 
       {/* Carbon Calculator Shortcut */}
-      <div className="dashboard-section">
+      <div className="dashboard-section" id="carbon">
         <div className="carbon-calculator-card">
           <div className="calculator-icon">🌍</div>
           <div className="calculator-content">
@@ -91,7 +91,7 @@ export default function UserHome() {
       </div>
 
       {/* Dashboard Stats Panel */}
-      <div className="dashboard-section">
+      <div className="dashboard-section" id="stats">
         <h2 className="section-title">Your Dashboard Stats</h2>
         <div className="stats-grid">
           <div className="stat-card">
@@ -122,7 +122,7 @@ export default function UserHome() {
       </div>
 
       {/* Transport Comparison Tool */}
-      <div className="dashboard-section">
+      <div className="dashboard-section" id="transport">
         <h2 className="section-title">Transport Comparison</h2>
         <div className="transport-comparison">
           <div className="transport-card">
@@ -178,7 +178,7 @@ export default function UserHome() {
       </div>
 
       {/* Goal Tracker */}
-      <div className="dashboard-section">
+      <div className="dashboard-section" id="goals">
         <h2 className="section-title">Your Goals</h2>
         <div className="goals-container">
           <div className="goal-card">
@@ -215,7 +215,7 @@ export default function UserHome() {
       </div>
 
       {/* Leaderboard */}
-      <div className="dashboard-section">
+      <div className="dashboard-section" id="leaderboard">
         <h2 className="section-title">Global Leaderboard</h2>
         <div className="leaderboard-container">
           <div className="leaderboard-item top">
@@ -251,6 +251,14 @@ export default function UserHome() {
             <div className="leaderboard-score">2,340 pts</div>
           </div>
         </div>
+      </div>
+      {/* Saved Records / History placeholder */}
+      <div className="dashboard-section" id="history">
+        <h2 className="section-title">Saved Records & History</h2>
+        <div className="history-card">
+          <p>Coming soon: view your past carbon logs and activity history here.</p>
+        </div>
+      </div>
       </div>
     </div>
   );

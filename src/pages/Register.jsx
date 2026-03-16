@@ -102,26 +102,26 @@ export default function Register() {
 
           <div className="input-group">
             <label htmlFor="email">Email Address</label>
-            <input
+        <input
               id="email"
-              type="email"
+          type="email"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
               className="auth-input"
-            />
+        />
           </div>
 
           <div className="input-group">
             <label htmlFor="password">Password</label>
-            <input
+        <input
               id="password"
-              type="password"
+          type="password"
               placeholder="Create a password (min. 6 characters)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
               className="auth-input"
               minLength={6}
             />
@@ -147,14 +147,14 @@ export default function Register() {
           >
             {loading ? "Creating Account..." : "Create Account"}
           </button>
-        </form>
+      </form>
 
         <p className="auth-switch">
           Already have an account?{" "}
           <Link to="/login" className="auth-link-text">
             Sign In
           </Link>
-        </p>
+      </p>
       </div>
     </div>
   );

@@ -46,9 +46,9 @@ export default function Navbar() {
       navigate(`/#${id}`);
       // After navigation, scroll to section
       setTimeout(() => {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }
@@ -71,7 +71,7 @@ export default function Navbar() {
           {/* LOGO */}
           <div className="nav-left">
             <Link to="/" style={{ textDecoration: "none" }}>
-              <h1 className="nav-title">🌱 GreenMeter</h1>
+            <h1 className="nav-title">🌱 GreenMeter</h1>
             </Link>
           </div>
 

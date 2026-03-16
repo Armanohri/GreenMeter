@@ -37,7 +37,7 @@ export default function App() {
         // Scroll to top first
         window.scrollTo({ top: 0, behavior: "instant" });
         // Then trigger animations
-        animateOnScroll();
+    animateOnScroll();
       }, 100);
       
       return () => clearTimeout(timer);

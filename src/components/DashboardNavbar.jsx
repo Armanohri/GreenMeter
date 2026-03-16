@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import "./DashboardNavbar.css";
 
 export default function DashboardNavbar() {
   const [darkMode, setDarkMode] = useState(false);
@@ -31,8 +32,8 @@ export default function DashboardNavbar() {
   };
 
   const logout = () => {
-    localStorage.removeItem("loggedIn");
-    navigate("/");
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
