@@ -363,6 +363,12 @@ body {
   border-color: rgba(255, 255, 255, 0.35);
 }
 
+.icon-btn:focus,
+.icon-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
 .icon {
   font-size: 18px;
   color: white;
@@ -699,6 +705,20 @@ body.dark-mode .icon {
 
 .stat-text {
   color: gray;
+}
+
+/* Dark mode: stats card and text using new palette */
+body.dark .stats {
+  background: #162a21; /* Section */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+body.dark .stat-title {
+  color: #4ade80; /* Light accent */
+}
+
+body.dark .stat-text {
+  color: #9ca3af; /* Muted text */
 }
 
 /* FEATURES */

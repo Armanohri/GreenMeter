@@ -67,6 +67,10 @@ body.dark .user-greeting p {
   gap: 12px;
 }
 
+.profile-wrapper {
+  position: relative;
+}
+
 .profile-btn,
 .logout-btn {
   padding: 12px 24px;
@@ -79,13 +83,26 @@ body.dark .user-greeting p {
 }
 
 .profile-btn {
-  background: #0d7f49;
-  color: white;
+  background: #ffffff;
+  color: #0d7f49;
+  border: 1px solid #0d7f49;
+  box-shadow: 0 6px 16px rgba(13, 127, 73, 0.18);
 }
 
 .profile-btn:hover {
-  background: #0a6b3d;
+  background: #e8ffe7;
   transform: translateY(-2px);
+}
+
+/* Dark mode: make profile button dark instead of green */
+body.dark .profile-btn {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+}
+
+body.dark .profile-btn:hover {
+  background: #030712;
 }
 
 .logout-btn {
@@ -105,6 +122,58 @@ body.dark .logout-btn {
 
 body.dark .logout-btn:hover {
   background: #2a3f35;
+}
+
+.profile-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  min-width: 210px;
+  background: rgba(15, 23, 42, 0.98);
+  border-radius: 16px;
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.55);
+  padding: 8px;
+  z-index: 50;
+}
+
+body.dark .profile-menu {
+  background: #020617;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.95);
+}
+
+.profile-menu-item {
+  width: 100%;
+  padding: 9px 12px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: #e5e7eb;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-menu-item:hover {
+  background: rgba(148, 163, 184, 0.18);
+}
+
+body.dark .profile-menu-item:hover {
+  background: #020617;
+}
+
+.profile-menu-logout {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+  color: #fecaca;
+}
+
+body.dark .profile-menu-logout {
+  border-top-color: rgba(31, 41, 55, 1);
+  color: #fecaca;
 }
 
 /* ============================================== */
@@ -276,6 +345,16 @@ body.dark .stat-change.negative {
   background: rgba(248, 113, 113, 0.15);
 }
 
+.stat-change.neutral {
+  color: #6b7280;
+  background: #e5e7eb;
+}
+
+body.dark .stat-change.neutral {
+  color: #9ca3af;
+  background: rgba(31, 41, 55, 0.9);
+}
+
 /* ============================================== */
 /* TRANSPORT COMPARISON TOOL                      */
 /* ============================================== */
@@ -393,9 +472,46 @@ body.dark .goal-card {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-.goal-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+.goal-card-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.goal-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px dashed #0d7f49;
+  background: transparent;
+  cursor: pointer;
+  color: #0d7f49;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goal-add-btn:hover {
+  background: #e8ffe7;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(13, 127, 73, 0.25);
+}
+
+.goal-add-icon {
+  font-size: 20px;
+}
+
+body.dark .goal-add-btn {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+body.dark .goal-add-btn:hover {
+  background: rgba(34, 197, 94, 0.12);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.8);
 }
 
 .goal-header {
@@ -463,6 +579,114 @@ body.dark .goal-description {
   color: #8ea59c;
 }
 
+/* Goal creation modal */
+
+.goal-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.goal-modal {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px 24px 20px 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+}
+
+body.dark .goal-modal {
+  background: #020617;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.9);
+}
+
+.goal-modal h3 {
+  margin: 0 0 4px 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.goal-modal-sub {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+body.dark .goal-modal-sub {
+  color: #9ca3af;
+}
+
+.goal-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.goal-form input,
+.goal-form select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+body.dark .goal-form input,
+body.dark .goal-form select {
+  background: #020617;
+  border-color: #1f2933;
+  color: #e5e7eb;
+}
+
+.goal-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.goal-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.goal-cancel-btn,
+.goal-save-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.goal-cancel-btn {
+  background: transparent;
+  color: #6b7280;
+}
+
+body.dark .goal-cancel-btn {
+  color: #9ca3af;
+}
+
+.goal-save-btn {
+  background: #0d7f49;
+  color: white;
+}
+
+.goal-save-btn:hover {
+  background: #0a6b3d;
+}
+
 /* ============================================== */
 /* LEADERBOARD                                    */
 /* ============================================== */
@@ -512,6 +736,10 @@ body.dark .leaderboard-item.top {
 body.dark .leaderboard-item.current {
   background: linear-gradient(135deg, #0a1a2a 0%, #142a3a 100%);
   border-color: #3b82f6;
+}
+
+.leaderboard-empty {
+  justify-content: center;
 }
 
 .leaderboard-rank {

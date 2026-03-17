@@ -102,6 +102,37 @@ export default function App() {
           }
         />
 
+        {/* SEPARATE NAV PAGES */}
+        <Route
+          path="/features"
+          element={
+            <>
+              <section className="fade-in"><Hero /></section>
+              <section className="fade-up"><Features /></section>
+            </>
+          }
+        />
+
+        <Route
+          path="/how-it-works"
+          element={
+            <>
+              <section className="fade-in"><Hero /></section>
+              <section className="fade-up"><HowItWorks /></section>
+            </>
+          }
+        />
+
+        <Route
+          path="/blog"
+          element={
+            <>
+              <section className="fade-in"><Hero /></section>
+              <section className="fade-up"><Footer /></section>
+            </>
+          }
+        />
+
         {/* AUTH ROUTES */}
         <Route
           path="/login"

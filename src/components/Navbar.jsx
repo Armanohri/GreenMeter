@@ -6,9 +6,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -16,6 +15,9 @@ export default function Navbar() {
       document.body.classList.add("dark");
       setDarkMode(true);
     }
+
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
 
   const toggleTheme = () => {
@@ -33,34 +35,8 @@ export default function Navbar() {
     }
   };
 
-  // Smooth Scroll or Navigate
-  const handleNavClick = (id) => {
-    if (isHomePage) {
-      // On home page, scroll to section
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      // On other pages, navigate to home with hash
-      navigate(`/#${id}`);
-      // After navigation, scroll to section
-      setTimeout(() => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    }
-  };
-
-  // Handle Home click
-  const handleHomeClick = () => {
-    if (isHomePage) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      navigate("/");
-    }
+  const goTo = (path) => {
+    navigate(path);
   };
 
   return (
@@ -77,10 +53,10 @@ export default function Navbar() {
 
           {/* NAV LINKS */}
           <ul className="nav-center">
-            <li onClick={handleHomeClick}>Home</li>
-            <li onClick={() => handleNavClick("features")}>Features</li>
-            <li onClick={() => handleNavClick("howitworks")}>How it Works</li>
-            <li onClick={() => handleNavClick("blog")}>Blog</li>
+            <li onClick={() => goTo("/")}>Home</li>
+            <li onClick={() => goTo("/features")}>Features</li>
+            <li onClick={() => goTo("/how-it-works")}>How it Works</li>
+            <li onClick={() => goTo("/blog")}>Blog</li>
             <li onClick={() => setFaqOpen(true)}>FAQs</li>
           </ul>
 
@@ -94,9 +70,15 @@ export default function Navbar() {
               ❔
             </button>
 
-            <Link to="/login" className="login-btn">
-              Log In
-            </Link>
+            {isLoggedIn ? (
+              <Link to="/dashboard" className="login-btn">
+                Dashboard
+              </Link>
+            ) : (
+              <Link to="/login" className="login-btn">
+                Log In
+              </Link>
+            )}
           </div>
 
           {/* MOBILE MENU ICON */}
@@ -128,15 +110,21 @@ export default function Navbar() {
         <div className="close-btn" onClick={() => setMenuOpen(false)}>✕</div>
 
         <ul>
-          <li onClick={() => { handleHomeClick(); setMenuOpen(false); }}>Home</li>
-          <li onClick={() => { handleNavClick("features"); setMenuOpen(false); }}>Features</li>
-          <li onClick={() => { handleNavClick("howitworks"); setMenuOpen(false); }}>How it Works</li>
-          <li onClick={() => { handleNavClick("blog"); setMenuOpen(false); }}>Blog</li>
+          <li onClick={() => { goTo("/"); setMenuOpen(false); }}>Home</li>
+          <li onClick={() => { goTo("/features"); setMenuOpen(false); }}>Features</li>
+          <li onClick={() => { goTo("/how-it-works"); setMenuOpen(false); }}>How it Works</li>
+          <li onClick={() => { goTo("/blog"); setMenuOpen(false); }}>Blog</li>
           <li onClick={() => { setFaqOpen(true); setMenuOpen(false); }}>FAQs</li>
           <li>
-            <Link to="/login" onClick={() => setMenuOpen(false)}>
-              Log In
-            </Link>
+            {isLoggedIn ? (
+              <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
+                Dashboard
+              </Link>
+            ) : (
+              <Link to="/login" onClick={() => setMenuOpen(false)}>
+                Log In
+              </Link>
+            )}
           </li>
         </ul>
       </div>

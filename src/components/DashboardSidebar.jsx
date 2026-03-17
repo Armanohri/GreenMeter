@@ -73,15 +73,25 @@ export default function DashboardSidebar({ onLogout }) {
     navigate("/login");
   };
 
+  const goHome = () => {
+    navigate("/");
+  };
+
   return (
     <aside className="dash-sidebar">
       <div className="dash-sidebar-inner">
-        <div className="dash-sidebar-logo">
+        <div className="dash-sidebar-logo" onClick={goHome}>
           <span className="logo-icon">🌱</span>
           <div className="logo-text">
             <span>GreenMeter</span>
-            <small>Dashboard</small>
           </div>
+        </div>
+
+        <div
+          className="dash-sidebar-dashboard-label"
+          onClick={() => scrollToSection("top")}
+        >
+          Dashboard
         </div>
 
         <button className="dash-sidebar-theme" onClick={toggleTheme}>

@@ -55,5 +55,6 @@
 
 /* Dark mode */
 body.dark .dashboard-navbar {
-  background: #121c18;
+  background: #1b3328; /* Navbar */
 }
+
